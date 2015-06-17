@@ -9,6 +9,8 @@ import net.vz.mongodb.jackson.{MongoCollection, JacksonDBCollection}
 import java.util.Locale
 import java.lang.reflect.ParameterizedType
 import com.mongodb.{WriteConcern, Mongo, MongoURI, ServerAddress}
+import javax.inject.Inject
+
 
 /**
  * MongoDB Jackson Mapper module for play framework
@@ -160,7 +162,7 @@ object MongoDB {
   }
 }
 
-class MongoDBPlugin(val app: Application) extends Plugin {
+class MongoDBPlugin @Inject() (val app: Application) extends Plugin {
 
   private val cache = new ConcurrentHashMap[(String, Class[_], Class[_]), JacksonDBCollection[_, _]]()
 
